@@ -10,7 +10,7 @@ Sylvie233的Vue3学习~~~
 
 >Upate: 22/10/16
 >
->Point: 小满Vue(P57)
+>Point: 
 
 
 
@@ -615,7 +615,7 @@ const Xxx = defineAsyncComponent(() => import())
 
 安装依赖：
 
-`npm i less -D`
+`npm i less less-loader -D`
 
 直接使用：
 
@@ -658,6 +658,20 @@ const Xxx = defineAsyncComponent(() => import())
 ### 集成UnoCss
 
 unocss：css原子化
+
+
+
+### 集成Pinia
+
+
+
+### 集成VueRouter
+
+
+
+### 集成Echarts
+
+
 
 
 
