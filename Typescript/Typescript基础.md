@@ -573,28 +573,28 @@ type MyType<T> = T extends Array<infer U> ? U : T
 
 
 
-### 内置对象
+## Typescript常用对象
 
-#### 1.RegExp
-
-
-
-#### 2.Date
+### RegExp
 
 
 
-#### 3.Error
+### Date
 
 
 
-#### 4.Dom对象
+### Error
+
+
+
+### Dom对象
 
 - HTMLElement
 - NodeList
 
 
 
-#### 5.Promise
+### Promise
 
 ```
 new Promise<T>((resolve, reject) => {
@@ -604,7 +604,7 @@ new Promise<T>((resolve, reject) => {
 
 
 
-#### 6.Object
+### Object
 
 ```
 Object.assign()
@@ -620,7 +620,7 @@ Object.getOnwPropertyNames()
 
 
 
-#### 7.Reflect
+### Reflect
 
 ```
 Reflect.get(target, prop, receiver)
@@ -633,7 +633,7 @@ Reflect.set(target, prop, val, receiver)
 
 
 
-#### 8.Set
+### Set
 
 ```
 let set: Set<T> = new Set([1, 2, 3])
@@ -643,7 +643,7 @@ let set: Set<T> = new Set([1, 2, 3])
 
 
 
-#### 9.Map
+### Map
 
 ```
 let map: Map<T1, T2> = new Map()
@@ -654,7 +654,7 @@ map.set(k, val)
 
 
 
-#### 10.Proxy
+### Proxy
 
 ```
 new Proxy(obj, {
@@ -685,10 +685,10 @@ tsconfig.json
       "incremental": true, // TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度
       "tsBuildInfoFile": "./buildFile", // 增量编译文件的存储位置
       "diagnostics": true, // 打印诊断信息 
-      "target": "ES5", // 目标语言的版本
+      "target": "ES5", // 目标语言的版本（ESNext|）
       "module": "CommonJS", // 生成代码的模板标准
       "outFile": "./app.js", // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置"module": "AMD",
-      "lib": ["DOM", "ES2015", "ScriptHost", "ES2019.Array"], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",
+      "lib": ["DOM", "ES2015", "ScriptHost", "ES2019.Array"], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",(DOM|DOM.Iterable|ESNext)
       "allowJS": true, // 允许编译器编译JS，JSX文件
       "checkJs": true, // 允许在JS文件中报错，通常与allowJS一起使用
       "outDir": "./dist", // 指定输出目录
@@ -719,7 +719,7 @@ tsconfig.json
       "noUnusedParameters": true, // 检查未使用的函数参数(只提示不报错)
       "noFallthroughCasesInSwitch": true, // 防止switch语句贯穿(即如果没有break语句后面不会执行)
       "noImplicitReturns": true, //每个分支都会有返回值
-      "esModuleInterop": true, // 允许export=导出，由import from 导入
+      "esModuleInterop": true, // 允许export=导出，由import from 导入,支持使用import d from 'cjs'的方式引入commonjs包。
       "allowUmdGlobalAccess": true, // 允许在模块中全局变量的方式访问umd模块
       "moduleResolution": "node", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
       "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
@@ -729,7 +729,14 @@ tsconfig.json
       },
       "rootDirs": ["src","out"], // 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错
       "listEmittedFiles": true, // 打印输出文件
-      "listFiles": true// 打印编译的文件(包括引用的声明文件)
+      "listFiles": true,// 打印编译的文件(包括引用的声明文件)
+      "useDefineForClassFields": true,//类属性定义使用Object.DefineProperty()
+      "skipLibCheck": true,//跳过.d.ts声明文件的类型检查
+      "allowSyntheticDefaultImports": true,//允许有没有默认导出的模块导入
+      "forceConsistentCasingInFileNames": true,//强制代码中使用的模块文件名必须和文件系统中的文件名保持大小写一致
+      "resolveJsonModule": true,//允许在ts模块中导入 JSON 文件。
+        "isolatedModules": true,// 确定ts文件为一个模块文件，而非全局脚本（import,export）
+        "jsx": "react-jsx", //设置jsx模式（react-jsx|）
     },
 
     // 指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
@@ -743,7 +750,11 @@ tsconfig.json
     // 指定哪些文件使用该配置（属于手动一个个指定文件）
      "files": [
        "demo.ts"
-    ]
+    ],
+    // ts子项目配置
+    "references": [{ 
+        "path": "./tsconfig.node.json" 
+    }]
 }
 ```
 
@@ -835,6 +846,17 @@ package.json中的types字段指定包的声明文件
 
 
 @types包
+
+
+
+### 三斜线指令
+
+```ts
+/// <reference types="vite/client" />
+
+
+/// <reference path="./video" />
+```
 
 
 
