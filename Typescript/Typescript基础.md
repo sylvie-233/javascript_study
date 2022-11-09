@@ -589,8 +589,12 @@ type MyType<T> = T extends Array<infer U> ? U : T
 
 ### Dom对象
 
-- HTMLElement
-- NodeList
+```
+HTMLElemnt
+NodeList
+
+
+```
 
 
 
