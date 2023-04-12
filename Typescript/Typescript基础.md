@@ -8,7 +8,7 @@ Sylvie233的Typescript学习~~~
 
 [TOC]
 
-## Typescript介绍
+## 基础介绍
 
 安装依赖：
 
@@ -30,11 +30,42 @@ Sylvie233的Typescript学习~~~
 
 
 
+### tsc
+
+```
+tsc:
+	--init:
+	
+```
+
+
+
+### ts-node
+
+```
+ts-node:
+	
+```
 
 
 
 
-## Typescript基础语法
+
+## 核心内容
+
+```
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"path": {
+			"@/*": ["src/*"],
+		},
+	},
+	extends: "./xxx.tsconfig.json",
+}
+```
+
+
 
 ### 基础数据类型
 
@@ -573,7 +604,15 @@ type MyType<T> = T extends Array<infer U> ? U : T
 
 
 
-## Typescript常用对象
+## 常用对象
+
+```
+:
+	JSX:
+		Element:
+```
+
+
 
 ### RegExp
 
@@ -677,7 +716,7 @@ new Proxy(obj, {
 
 
 
-## Typescript配置文件
+## 配置文件
 
 tsconfig.json
 
@@ -826,7 +865,7 @@ compilerOptions.experimentalDecorators
 
 
 
-## Typescript声明文件
+## 声明文件
 
 .d.ts文件
 
@@ -874,15 +913,7 @@ package.json中的types字段指定包的声明文件
 
 
 
-## Typescript知识点补充
-
-### tsc指令
-
-#### 1.--init
-
-
-
-
+## 知识点补充
 
 ### rollup构建
 

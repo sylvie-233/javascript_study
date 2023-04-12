@@ -1,22 +1,16 @@
 # Vue3基础
 
-Sylvie233的Vue3学习~~~
-
 > Author: Sylvie233
 >
-> Date: 2022/10/16
-
-
-
->Upate: 22/10/16
+> Date: 22/10/16
 >
->Point: 
+> Point:  
 
 
 
 [TOC]
 
-## Vue3介绍
+## 基础介绍
 
 MVVM架构
 
@@ -40,62 +34,182 @@ Vue宏："vue/macros"
 
 
 
-### 新建项目
-
-Vite构建
-
-`npm init vite@latest`
-
-选择Vue+Typescript
-
-项目依赖
-
-1. vue
-
-2. @vitejs/plugin-vue
-
-3. typescript
-
-4. vite
-5. vue-tsc
 
 
 
-Vue脚手架构建
-
-`npm init vue@latest`
-
-项目依赖
-
-1. vue
-2. @types/node
-3. @vitejs/plugin-vue
-4. @vue/tsconfig
-5. npm-run-all
-6. typescript
-7. vite
-8. vue-tsc
 
 
 
-### 目录结构
-
-1. /public
-2. /src
-   1. /assets
-   2. /components
-   3. App.vue
-   4. main.ts
-   5. style.css
-   6. vite-env.d.ts
-3. index.html
-4. package.json
-5. tsconfig.json
-6. vite.config.json
 
 
 
-## Vue3基础语法
+
+
+
+### 项目目录
+
+```
+vue-cli脚手架:
+	/node_modules:
+	/public:
+		favicon.ico:
+		index.html:
+	/src:
+		/assets:
+		/components:
+		/router:
+		/views:
+		App.vue:
+		main.ts:
+		env.d.ts:
+	.gitignore:
+	babel.config.js:
+	package.json:
+	tsconfig.json:
+	vue.config.js:
+```
+
+
+
+`vue.config.js`
+
+```
+const { defineConfig } = require("@vue/cli-service")
+
+module.exports = defineConfig({
+	transpileDependencies: true,
+	configureWebpack: {
+		plugins: []
+	}
+})
+```
+
+
+
+`package.json`
+
+```
+{
+	"eslintConfig": {
+		"rules": {
+			
+		}
+	},
+}
+```
+
+
+
+
+
+`tsconfig.json`
+
+```
+{
+	"compilerOptions": {
+		"target": "exnext",
+		"baseUrl": ".",
+		"types": [
+			"webpack-env"
+		],
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"lib": ["esnext",],
+	},
+	"include": [],
+	"exclude": []
+}
+```
+
+
+
+`env.d.ts`：.vue文件的声明
+
+```
+declare module "*.vue" {
+	import type { DefineComponent } from "vue"
+	const component: DefineComponent<{}, {}, any>
+	export default component
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### vue
+
+```
+vue:
+	create:
+```
+
+
+
+### vue-cli-service
+
+```
+vue-cli-service:
+	serve:
+```
+
+
+
+
+
+### vue-tsc
+
+```
+vue-tsc:
+	--noEmit:
+```
+
+
+
+
+
+## 核心内容
 
 ### 模板语法
 
@@ -424,7 +538,88 @@ app.use(Xxx)
 
 
 
-## Vue3常用API
+## 常用API
+
+```
+vue:
+	createApp():
+		mount():
+		use():
+	computed():
+	defineComponent():
+		components:
+		name:
+		render():
+		setup():
+	defineProps():
+	onMounted():
+	ref():
+	reactive():
+	toRefs():
+	watch():
+	
+	
+	
+vue-router:
+	RouteRecordRaw:
+	createRouter():
+		addRoute():
+		afterEach():
+		beforeEach():
+	createWebHistory():
+	useRoute():
+		---
+		hash:
+		params:
+		name:
+		path:
+		matched:
+		query:
+		redirectedFrom:
+	useRouter():
+		---
+		getRoutes():
+		push():
+			name:
+			path:
+			params: {}
+			query: {}
+
+vuex:
+	createStore():
+	useStore():
+		commit():
+		dispatch():
+		
+	
+element-plus:
+	FormInstance:
+		---
+		validate():
+			isValid:
+
+axios:
+	create():
+		baseURL:
+		timeout:
+		headers: {}
+		---
+		interceptors:
+			request:
+				use():
+					(config) => config
+			response:
+				use():
+					(resp) => resp:
+		():
+			url:
+			method:
+			data:
+		get():
+		post():
+```
+
+
 
 ### 1.DefineComponent
 
@@ -609,7 +804,146 @@ const Xxx = defineAsyncComponent(() => import())
 
 
 
-## 第三方库集成
+## 第三方库
+
+### VueRouter
+
+安装
+
+```
+npm install vue-router@4 -S
+```
+
+
+
+目录结构
+
+```
+:
+	/router:
+		index.ts
+```
+
+
+
+`router/index.ts`
+
+```
+const routes: Array<RouteRecordRaw> = [
+	{
+		path: "/",
+		name: "xxx",
+		meta: {},
+		component: () => import("xxx.vue"),
+		children: []
+	},
+]
+
+const router = createRouter({
+	history: createWebHistory(),
+	routes,
+	scrollBehavior: (to, from, savePosition) => {
+		return {
+			top,
+		}
+	}
+})
+
+export default router
+```
+
+
+
+常用组件
+
+```
+:
+	<router-view>:
+```
+
+
+
+
+
+### Vuex
+
+安装
+
+```
+
+```
+
+
+
+目录结构
+
+```
+:
+	/store:
+		index.js:
+```
+
+
+
+`store/index.js`
+
+```
+import { createStore } from "vuex"
+
+export default createStore({
+	state: {},
+	getters: {},
+	mutations: {},
+	actions: {},
+	modules: {},
+})
+```
+
+
+
+
+
+
+
+### Pinia
+
+
+
+### ElementPlus
+
+安装
+
+```
+npm install element-plus -S
+```
+
+
+
+基础使用
+
+```
+import ElementPlus from "element-plus"
+import "element-plus/dist/index.css"
+
+app.use(ElementPlus)
+```
+
+
+
+常用组件
+
+```
+:
+	<el-button>:
+	<el-form>:
+		<el-form-item>:
+```
+
+
+
+
+
+
 
 ### 集成Less
 
@@ -624,8 +958,6 @@ const Xxx = defineAsyncComponent(() => import())
 ```
 
 
-
-### 集成ElementPlus
 
 
 
@@ -661,14 +993,6 @@ unocss：css原子化
 
 
 
-### 集成Pinia
-
-
-
-### 集成VueRouter
-
-
-
 ### 集成Echarts
 
 
@@ -697,7 +1021,7 @@ unocss：css原子化
 
 
 
-## Vue3知识点补充
+## 知识点补充
 
 ### 环境变量
 

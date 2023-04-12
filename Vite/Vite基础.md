@@ -8,17 +8,65 @@ Sylvie233的Vite学习~~~
 
 [TOC]
 
-## Vite介绍
+## 基础介绍
 
 
 
-## Vite配置
-
-配置文件：vite.config.ts
+esbuild打包器
 
 
 
-### 基础配置
+原生ESM的HMR
+
+
+
+启动
+
+```
+pnpm create vite
+```
+
+
+
+依赖预构建
+
+
+
+
+
+### vite
+
+```
+vite:
+	--base:
+	--force:
+	--host:
+	--mode:
+	build:
+	preview:
+```
+
+
+
+
+
+## 核心内容
+
+vite.config.js
+
+```
+
+```
+
+
+
+
+
+
+
+### 配置文件
+
+#### 基础配置
 
 ```js
 {
@@ -149,7 +197,7 @@ Sylvie233的Vite学习~~~
 
 
 
-### React集成配置
+#### React集成配置
 
 tsconfig.node.json子项目配置
 
@@ -169,14 +217,415 @@ export default defineConfig({
 
 
 
-## Vite常用指令
+### 项目目录
+
+#### Vue
+
+```
+Vue项目:
+	/node_modules:
+	/public:
+		favicon.ico:
+	/src:
+		/assts:
+		/components:
+		App.vue:
+		main.js:
+	.gitignore:
+	index.html:
+	packaage.json:
+	pnpm-lock.yaml:
+	vite.config.js:
+```
 
 
 
-### 1.preview
+配置文件
+
+```
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import vueJsx from "@vitejs/plugin-vue-jsx"
+import legacy from "@vitejs/plugin-legacy" // 降级兼容浏览器
+
+export default defineConfig({
+	resolve: {
+		alias: {
+			"@xxx": "路径别名"
+		},
+	},
+	cacheDir: "./.cache",
+	build: {
+		rollupOptions: {
+			input: { // 输入文件
+				main: "xxx.html",
+				xxx: "路径",
+			}
+		},
+		target: "es2015",
+	},
+	
+	
+	css: {
+		modules: {
+			localsConvention: "camelCase",	
+		},
+	},
+	
+	
+	plugins: [
+		vue(),
+		vueJsx(),
+		legacy({
+			targets: [
+				"defaults",
+				""
+			],
+		}),
+	],
+	
+	
+	optimizeDeps: {
+		include: [
+			"esm-dep",
+		],
+	},
+})
+```
 
 
 
-### 2.build
+#### Vue-Ts
 
-默认/dist目录
+```
+Vue-Ts项目:
+	/node_modules:
+	/public:
+	/src:
+		/assets:
+		/components:
+		App.vue:
+		env.d.ts:
+		main.ts:
+	.gitignore:
+	index.html:
+	package.json:
+	pnpm-lock.yaml:
+	tsconfig.json:
+	tsconfig.node.json:
+	vite.config.ts:
+```
+
+
+
+env.d.ts
+
+```
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv { // import.meta.env类型定义
+
+}
+```
+
+
+
+
+
+vite.config.ts
+
+```
+
+```
+
+
+
+tsconfig.json
+
+```
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"useDefineForClassFields": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"strict": true,
+		"jsx": "preserve",
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"lib": ["esnext", "dom"],
+		"isolatedModules": true,
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+	],
+	"references": [
+		{
+			"path": "./tsconfig.node.json",
+		},
+	],
+}
+```
+
+
+
+tsconfig.node.json
+
+```
+{
+	"compilerOptions": {
+		"composite": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+	},
+	"include": [
+		"vite.config.ts",
+	],
+}
+```
+
+
+
+#### React
+
+```
+React项目:
+	/node_modules:
+	/src:
+		App.css:
+		App.jsx:
+		favicon.svg:
+		index.css:
+		logo.svg:
+		main.jsx:
+	.gitignore:
+	index.html:
+	package.json:
+	pnpm-lock.yaml:
+	vite.config.js:
+```
+
+
+
+配置文件
+
+```
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+
+export default defineConfig({
+	plugins: [
+		react(),
+	],
+})
+```
+
+
+
+
+
+### 缓存
+
+`/node_modules/.vite`
+
+
+
+
+
+### 模块热重载
+
+#### ImportMeta
+
+```
+import.meta
+	env:
+		BASE_URL:
+		SSR:
+		Mode:
+		DEV:
+		PROD:
+	hot:
+        data: 模块内变量
+        accept(): 开始热更新钩子
+        decline():
+        dispose(): 结束热更新钩子
+        invalidate():
+    url:
+    glob():
+    globEager():
+```
+
+
+
+### 环境变量
+
+`.env`
+
+```
+
+```
+
+
+
+
+
+### ts集成
+
+
+
+### Postcss
+
+`postcss.config.js`
+
+```
+module.exports = {
+	plugins: [
+		require("postcss-nested"),
+	]
+}
+```
+
+
+
+### css预处理器
+
+内置支持预处理器，只需按照对应依赖即可直接使用
+
+
+
+### Eslint
+
+```
+npm i eslint eslint-config-stand eslint-plugin-node eslint-plugin-promise es-plugin-import 
+```
+
+
+
+`.eslintrc.js`
+
+```
+module.exports = {
+	extends: "standard",
+	rules: {
+		"space-before-function-paren": "off",
+		"no-undef": "off",
+	},
+}
+```
+
+
+
+prettier工具
+
+`.prettierrc`
+
+```
+{
+	"semi": false,
+	
+}
+```
+
+
+
+
+
+
+
+### 静态资源
+
+- ?url
+- ?raw
+
+
+
+
+
+
+
+### WebWorker
+
+- ?worker
+
+直接实例化即可
+
+
+
+```
+const worker = new Worker("./xxx.js")
+worker.onmessage = ev => {
+	ev.data
+}
+```
+
+
+
+### WebAssembly
+
+
+
+### Git Husky
+
+```
+npm i husky
+```
+
+
+
+husky
+
+```
+husky:
+	add:
+		.husky/pre-commit:
+	install:
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 常用API
+
+```
+vite:
+	defineCOnfig:
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
