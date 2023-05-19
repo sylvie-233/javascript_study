@@ -4,7 +4,7 @@
 >
 > Date: 23/3/10
 >
-> Point: P17
+> Point: 
 
 [TOC]
 
@@ -27,6 +27,30 @@ JS三大部分：ECMAScript（js基础语法）、DOM、BOM
 基本数据类型(栈、值)：String、Number、Boolean、undefined、null
 
 引用数据类型(堆、地址)：Object、Function、Array、Date、RegExp
+
+
+
+
+
+
+
+
+
+### 浏览器
+
+<img src="js基础.assets/image-20230518214038893.png" alt="image-20230518214038893" style="zoom:67%;" />![image-20230519113517333](js基础.assets/image-20230519113517333.png)
+
+<img src="js基础.assets/image-20230519113517333.png" alt="image-20230519113517333" style="zoom:67%;" />
+
+
+
+
+
+浏览器内核
+
+<img src="js基础.assets/image-20230519113006011.png" alt="image-20230519113006011" style="zoom:67%;" />
+
+
 
 
 
