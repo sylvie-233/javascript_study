@@ -543,8 +543,8 @@ app.use(Xxx)
 ```
 vue:
 	createApp():
-		mount():
-		use():
+		mount(): 挂载
+		use(): 使用插件
 	computed():
 	defineComponent():
 		components:
@@ -561,11 +561,12 @@ vue:
 	
 	
 vue-router:
+	Router:
 	RouteRecordRaw:
 	createRouter():
 		addRoute():
 		afterEach():
-		beforeEach():
+		beforeEach(): 全局前置守卫
 	createWebHistory():
 	useRoute():
 		---

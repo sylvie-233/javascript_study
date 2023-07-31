@@ -101,7 +101,7 @@ react-scripts:
 
 
 
-## 常用API
+## API
 
 ```
 react:

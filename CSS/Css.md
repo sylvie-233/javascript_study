@@ -1,4 +1,4 @@
-# Css基础
+# CSS基础
 
 > Author: Sylvie233
 >
@@ -43,7 +43,7 @@ CSS优先级：
 ## 核心内容
 
 ```
-Css3:
+CSS3:
 	align-itmes:
 		center:
 	background-color:
